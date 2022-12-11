@@ -68,7 +68,9 @@
     <select id="cars" name="cars">
       <option default value="color">full color</option>
       <option value="mono">monochrome</option>
-      <!-- <option value="fun-1">fun zine 1</option> -->
+      <option value="random">random</option>
+      <option value="weird">weird</option>
+      <option value="ziney">ziney</option>
       <!-- <option value="fun-2">fun zine 2</option> -->
       <!-- <option value="scary">scary zine</option> -->
     </select>
@@ -123,13 +125,62 @@
 <script>
   const dropdown = document.querySelector("select");
   const images = document.querySelectorAll("img");
+  const randomColor = document.querySelector("#random-color");
   let dropdownVal = dropdown.value;
+  // const randomDeg = () => 
   dropdown.addEventListener("change", () => {
-    if (dropdown.value !== dropdownVal) {
+    const hueRotate = Math.floor(Math.random() * 360);
+    const saturate = Math.floor(Math.random() * 2) + 1;
+    if (dropdown.value === "random") {
+      images.forEach((img, idx) => {
+        img.style.filter = `sepia(1) hue-rotate(${hueRotate}deg) saturate(${saturate})`;
+        img.style.border = ``;
+        img.style.borderLeft = `1px solid #eee`;
+        img.style.borderRight = `1px solid #eee`;
+      });
+    } else if (dropdown.value === "color") {
+      images.forEach((img, idx) => {
+        img.style.filter = ``;
+        img.style.border = ``;
+        img.style.borderLeft = `1px solid #eee`;
+        img.style.borderRight = `1px solid #eee`;
+      });
+    } else if (dropdown.value === "scary") {
+      images.forEach((img, idx) => {
+        img.style.filter = `contrast(20) hue-rotate(${hueRotate}deg)`;
+        img.style.border = ``;
+        img.style.borderLeft = `1px solid #eee`;
+        img.style.borderRight = `1px solid #eee`;
+      });
+    } else if (dropdown.value === "ziney") {
+      images.forEach((img, idx) => {
+        img.style.filter = `saturate(0) contrast(10)`;
+        img.style.border = `1px solid black`;
+      });
+    } else if (dropdown.value === "weird") {
+      images.forEach((img, idx) => {
+        img.src = `images-color/page-${idx}.jpg`;
+        img.style.filter = `saturate(1) contrast(20) invert(1) hue-rotate(${hueRotate}deg)`;
+        img.style.border = ``;
+        img.style.borderLeft = `1px solid #eee`;
+        img.style.borderRight = `1px solid #eee`;
+      });
+    } else if (dropdown.value === "color") {
       dropdownVal = dropdown.value;
       images.forEach((img, idx) => {
-        img.src = `images-${dropdownVal}/page-${idx}.jpg`;
-      })
+        img.style.filter = ``;
+        img.style.border = ``;
+        img.style.borderLeft = `1px solid #eee`;
+        img.style.borderRight = `1px solid #eee`;
+      });
+    } else if (dropdown.value === "mono") {
+      dropdownVal = dropdown.value;
+      images.forEach((img, idx) => {
+        img.style.filter = `saturate(0)`;
+        img.style.border = ``;
+        img.style.borderLeft = `1px solid #eee`;
+        img.style.borderRight = `1px solid #eee`;
+      });
     }
   })
 </script>
